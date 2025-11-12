@@ -1,0 +1,49 @@
+CXCR4 Selectivity Experiment - Structure Summary
+================================================
+
+Downloaded: 2025-11-10
+
+PRIMARY TARGET:
+---------------
+File: 8u4q_cxcr4.pdb
+Source: PDB 8U4Q, Chain R
+Description: CXCR4 receptor in complex with REGN7663 Fab
+Residues: 24-318 (295 residues)
+Size: 189 KB (2385 lines)
+Use: Primary target for de novo binder generation
+
+OFF-TARGETS (for selectivity screening):
+-----------------------------------------
+1. File: 4mbs_ccr5.pdb
+   Source: PDB 4MBS, Chain A
+   Description: CCR5 receptor (HIV co-receptor)
+   Similarity to CXCR4: ~80%
+   Size: 218 KB (2744 lines)
+
+2. File: 6lfo_cxcr2.pdb
+   Source: PDB 6LFO, Chain R
+   Description: CXCR2 receptor (chemokine receptor)
+   Similarity to CXCR4: ~60%
+   Size: 195 KB (2453 lines)
+
+INVERSE FOLDING SCAFFOLD:
+--------------------------
+File: 8u4q_fab.pdb
+Source: PDB 8U4Q, Chains H+L
+Description: REGN7663 Fab (known CXCR4 binder)
+Size: 267 KB (3363 lines)
+Use: Scaffold for sequence optimization experiments
+CDR regions: Can be redesigned for improved selectivity
+
+EXPERIMENTAL DESIGN:
+--------------------
+Baseline: Generate binders for CXCR4 (no selectivity)
+Selective: Generate binders for CXCR4 with selectivity against CCR5 + CXCR2
+Inverse Fold: Optimize REGN7663 Fab sequences for improved selectivity
+
+SMALL BENCHMARK PARAMETERS:
+---------------------------
+num_designs: 100 (vs 5000 for full run)
+budget: 50 (vs 100 for full run)
+num_candidates: 30 (for selectivity scoring)
+Expected runtime: ~15-30 min (vs 3-4 hours for full)
