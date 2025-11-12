@@ -17,6 +17,14 @@ import subprocess
 from pathlib import Path
 from datetime import datetime
 import shutil
+import pandas as pd
+from typing import Optional, Dict
+
+# Import optimization and output modules
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from src.optimization.pareto import ParetoOptimizer
+from src.output.json_generator import JSONOutputGenerator
+from src.visualization.plots import SelectivityVisualizer
 
 
 class BinderOptimizationPipeline:
@@ -59,7 +67,7 @@ class BinderOptimizationPipeline:
 
     def _validate_input_files(self):
         """Verify all input files exist."""
-        print("\n[Stage 1/5] Validating input files...")
+        print("\n[Stage 1/7] Validating input files...")
 
         missing_files = []
 
@@ -93,7 +101,7 @@ class BinderOptimizationPipeline:
 
     def _generate_boltzgen_config(self) -> Path:
         """Generate BoltzGen YAML configuration."""
-        print("\n[Stage 2/5] Generating BoltzGen configuration...")
+        print("\n[Stage 2/7] Generating BoltzGen configuration...")
 
         # Create output directory
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -202,7 +210,7 @@ class BinderOptimizationPipeline:
 
     def _run_boltzgen(self, config_path: Path):
         """Execute BoltzGen design generation."""
-        print("\n[Stage 3/5] Running BoltzGen design generation...")
+        print("\n[Stage 3/7] Running BoltzGen design generation...")
 
         params = self.config['parameters']
         num_designs = params.get('num_designs', 100)
@@ -236,7 +244,7 @@ class BinderOptimizationPipeline:
 
     def _run_selectivity_scoring(self, workbench_dir: Path):
         """Score designs for selectivity against off-targets."""
-        print("\n[Stage 4/5] Running selectivity scoring...")
+        print("\n[Stage 4/7] Running selectivity scoring...")
 
         params = self.config['parameters']
         num_candidates = params.get('num_candidates', 30)
@@ -278,9 +286,70 @@ class BinderOptimizationPipeline:
             print(f"\nERROR: Selectivity scoring failed with exit code {e.returncode}")
             sys.exit(1)
 
-    def _generate_outputs(self, scorer_output: Path):
+    def _run_pareto_optimization(self, scorer_output: Path) -> Optional[Path]:
+        """Run Pareto multi-objective optimization."""
+        scoring_config = self.config.get('scoring', {})
+
+        if not scoring_config.get('multi_objective', False):
+            print("\n[Stage 5/7] Pareto optimization: Skipped (multi_objective=false)")
+            return None
+
+        print("\n[Stage 5/7] Running Pareto multi-objective optimization...")
+
+        csv_file = scorer_output / "aggregate_metrics_selectivity.csv"
+        if not csv_file.exists():
+            print("  ⚠ Selectivity CSV not found, skipping Pareto optimization")
+            return None
+
+        # Load scored data
+        df = pd.read_csv(csv_file)
+
+        # Get weights from config
+        weights = scoring_config.get('weights', {
+            'affinity': 0.6,
+            'selectivity': 0.3,
+            'properties': 0.1
+        })
+
+        # Initialize Pareto optimizer
+        optimizer = ParetoOptimizer(
+            objectives=['design_to_target_iptm', 'selectivity_composite'],
+            maximize={'design_to_target_iptm': True, 'selectivity_composite': True}
+        )
+
+        # Run optimization
+        pareto_results = optimizer.optimize(
+            df,
+            objectives=['design_to_target_iptm', 'selectivity_composite']
+        )
+
+        # Save Pareto results
+        pareto_output = self.output_dir / "pareto_optimization"
+        pareto_output.mkdir(exist_ok=True)
+
+        # Extract Pareto-optimal designs from dataframe
+        pareto_df = pareto_results['df'][pareto_results['df']['pareto_optimal']]
+
+        pareto_df.to_csv(
+            pareto_output / "pareto_frontier.csv",
+            index=False
+        )
+
+        # Save trade-off analysis
+        if 'analysis' in pareto_results:
+            import json
+            trade_off_file = pareto_output / "trade_off_analysis.json"
+            with open(trade_off_file, 'w') as f:
+                json.dump(pareto_results['analysis'], f, indent=2)
+
+        print(f"  ✓ Pareto frontier: {len(pareto_df)} designs")
+        print(f"  ✓ Results saved: {pareto_output}/")
+
+        return pareto_results
+
+    def _generate_outputs(self, scorer_output: Path, pareto_results: Optional[Dict]):
         """Generate final outputs in requested formats."""
-        print("\n[Stage 5/5] Generating outputs...")
+        print("\n[Stage 6/7] Generating output files...")
 
         output_formats = self.config['output'].get('format', ['csv', 'json'])
 
@@ -292,21 +361,64 @@ class BinderOptimizationPipeline:
                 shutil.copy(csv_src, csv_dst)
                 print(f"  ✓ CSV results: {csv_dst}")
 
-        # TODO: Generate JSON output
+        # Generate JSON output
         if 'json' in output_formats:
-            print("  ⚠ JSON output not yet implemented")
+            print("  Generating JSON output...")
+            csv_file = scorer_output / "aggregate_metrics_selectivity.csv"
 
-        # Copy visualization plots
-        if 'plots' in output_formats and scorer_output:
-            plots_src = scorer_output / "plots"
-            if plots_src.exists():
+            if csv_file.exists():
+                # Load the dataframe (either with Pareto results or without)
+                if pareto_results:
+                    df = pareto_results['df']
+                    pareto_dict = pareto_results
+                else:
+                    df = pd.read_csv(csv_file)
+                    pareto_dict = None
+
+                json_gen = JSONOutputGenerator(self.config)
+                json_dst = self.output_dir / "results.json"
+
+                json_output = json_gen.generate_output(
+                    df=df,
+                    pareto_results=pareto_dict,
+                    output_path=json_dst
+                )
+
+                print(f"  ✓ JSON results: {json_dst}")
+            else:
+                print("  ⚠ CSV file not found, skipping JSON generation")
+
+        # Generate visualization plots
+        if 'plots' in output_formats:
+            print("  Generating visualization plots...")
+            csv_file = scorer_output / "aggregate_metrics_selectivity.csv"
+
+            if csv_file.exists():
                 plots_dst = self.output_dir / "plots"
-                if plots_dst.exists():
-                    shutil.rmtree(plots_dst)
-                shutil.copytree(plots_src, plots_dst)
-                print(f"  ✓ Plots: {plots_dst}/")
+
+                visualizer = SelectivityVisualizer(dpi=300)
+                metrics_df = pd.read_csv(csv_file)
+
+                visualizer.create_comprehensive_dashboard(
+                    metrics_df,
+                    plots_dst,
+                    title_prefix=self.project_name
+                )
+
+                visualizer.create_summary_table(metrics_df, plots_dst)
+
+                print(f"  ✓ Visualizations: {plots_dst}/")
+            else:
+                print("  ⚠ CSV file not found, skipping visualization generation")
 
         print(f"\n✓ All outputs saved to: {self.output_dir}")
+
+    def _print_final_summary(self):
+        """Print final pipeline summary."""
+        print("\n[Stage 7/7] Pipeline summary")
+        print(f"  Project: {self.project_name}")
+        print(f"  Type: {self.project_type}")
+        print(f"  Output directory: {self.output_dir}")
 
     def run(self):
         """Execute the complete pipeline."""
@@ -331,15 +443,23 @@ class BinderOptimizationPipeline:
             # Stage 4: Run selectivity scoring
             scorer_output = self._run_selectivity_scoring(workbench_dir)
 
-            # Stage 5: Generate outputs
-            self._generate_outputs(scorer_output)
+            # Stage 5: Run Pareto optimization
+            pareto_results = self._run_pareto_optimization(scorer_output) if scorer_output else None
+
+            # Stage 6: Generate outputs
+            self._generate_outputs(scorer_output, pareto_results)
+
+            # Stage 7: Summary
+            self._print_final_summary()
 
             print("\n" + "="*80)
             print("✓ PIPELINE COMPLETE!")
             print("="*80)
             print(f"\nResults available at: {self.output_dir}")
-            print(f"  - ranked_designs.csv")
-            print(f"  - plots/")
+            print(f"  - ranked_designs.csv (Top candidates with selectivity scores)")
+            print(f"  - results.json (Structured output for web UI)")
+            print(f"  - pareto_optimization/ (Multi-objective analysis)")
+            print(f"  - plots/ (Visualization)")
             print("="*80 + "\n")
 
         except Exception as e:
