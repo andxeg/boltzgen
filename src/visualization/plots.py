@@ -114,15 +114,22 @@ class SelectivityVisualizer:
     ):
         """Plot affinity vs selectivity with color-coded properties."""
 
+        # Check for affinity column (support both naming conventions)
+        affinity_col = None
+        if 'design_to_target_iptm' in df.columns:
+            affinity_col = 'design_to_target_iptm'
+        elif 'design_iiptm' in df.columns:
+            affinity_col = 'design_iiptm'
+
         # Check required columns
-        if 'design_iiptm' not in df.columns or 'selectivity_composite' not in df.columns:
+        if affinity_col is None or 'selectivity_composite' not in df.columns:
             ax.text(0.5, 0.5, 'Missing data', ha='center', va='center', transform=ax.transAxes)
             return
 
         # Color by solubility if available
         if 'solubility' in df.columns:
             scatter = ax.scatter(
-                df['design_iiptm'],
+                df[affinity_col],
                 df['selectivity_composite'],
                 c=df['solubility'],
                 cmap='viridis',
@@ -134,7 +141,7 @@ class SelectivityVisualizer:
             plt.colorbar(scatter, ax=ax, label='Solubility')
         else:
             ax.scatter(
-                df['design_iiptm'],
+                df[affinity_col],
                 df['selectivity_composite'],
                 alpha=0.7,
                 s=50,
@@ -143,18 +150,25 @@ class SelectivityVisualizer:
             )
 
         # Add baseline if provided
-        if baseline is not None and 'design_iiptm' in baseline.columns:
-            ax.scatter(
-                baseline['design_iiptm'].mean(),
-                0,  # Baseline has no selectivity optimization
-                color='red',
-                s=200,
-                marker='*',
-                edgecolors='black',
-                linewidth=2,
-                label='Original REGN7663',
-                zorder=10
-            )
+        if baseline is not None:
+            baseline_affinity_col = None
+            if 'design_to_target_iptm' in baseline.columns:
+                baseline_affinity_col = 'design_to_target_iptm'
+            elif 'design_iiptm' in baseline.columns:
+                baseline_affinity_col = 'design_iiptm'
+
+            if baseline_affinity_col:
+                ax.scatter(
+                    baseline[baseline_affinity_col].mean(),
+                    0,  # Baseline has no selectivity optimization
+                    color='red',
+                    s=200,
+                    marker='*',
+                    edgecolors='black',
+                    linewidth=2,
+                    label='Original REGN7663',
+                    zorder=10
+                )
 
         # Reference lines
         ax.axhline(0, color='red', linestyle='--', linewidth=2, alpha=0.5,
@@ -174,9 +188,10 @@ class SelectivityVisualizer:
         # Get top 30 by selectivity
         top_df = df.nlargest(30, 'selectivity_composite')
 
-        # Find target columns
-        target_cols = ['design_iiptm']
-        offtarget_cols = [c for c in df.columns if 'offtarget_iptm' in c and '_CCR5' in c or '_CXCR2' in c]
+        # Find target columns (support both naming conventions)
+        affinity_col = 'design_to_target_iptm' if 'design_to_target_iptm' in df.columns else 'design_iiptm'
+        target_cols = [affinity_col] if affinity_col in df.columns else []
+        offtarget_cols = [c for c in df.columns if 'offtarget_iptm' in c]
 
         all_cols = target_cols + offtarget_cols
 
@@ -254,19 +269,27 @@ class SelectivityVisualizer:
     def _plot_property_comparison(self, df: pd.DataFrame, ax: plt.Axes):
         """Compare properties: selective ranking vs affinity ranking."""
 
+        # Find affinity column (support both naming conventions)
+        affinity_col = 'design_to_target_iptm' if 'design_to_target_iptm' in df.columns else 'design_iiptm'
+
+        if affinity_col not in df.columns:
+            ax.text(0.5, 0.5, 'Missing affinity data', ha='center', va='center',
+                   transform=ax.transAxes)
+            return
+
         # Top 30 by selectivity
         top_selective = df.nlargest(30, 'selectivity_composite')
 
         # Top 30 by affinity (no selectivity consideration)
-        top_affinity = df.nlargest(30, 'design_iiptm')
+        top_affinity = df.nlargest(30, affinity_col)
 
         # Comparison metrics
         metrics = {}
 
-        if 'design_iiptm' in df.columns:
+        if affinity_col in df.columns:
             metrics['Primary\nAffinity'] = [
-                top_selective['design_iiptm'].mean(),
-                top_affinity['design_iiptm'].mean()
+                top_selective[affinity_col].mean(),
+                top_affinity[affinity_col].mean()
             ]
 
         if 'max_offtarget_iptm' in df.columns:
@@ -338,7 +361,8 @@ class SelectivityVisualizer:
         print("  ✓ binding_profile_heatmap.png")
 
         # 3. Pareto frontier (if multiple objectives)
-        if all(col in df.columns for col in ['design_iiptm', 'selectivity_composite']):
+        affinity_col = 'design_to_target_iptm' if 'design_to_target_iptm' in df.columns else 'design_iiptm'
+        if affinity_col in df.columns and 'selectivity_composite' in df.columns:
             fig, ax = plt.subplots(figsize=(10, 8))
             self._plot_pareto_frontier(df, ax)
             plt.tight_layout()
@@ -349,8 +373,11 @@ class SelectivityVisualizer:
     def _plot_pareto_frontier(self, df: pd.DataFrame, ax: plt.Axes):
         """Plot Pareto frontier for multi-objective optimization."""
 
+        # Find affinity column (support both naming conventions)
+        affinity_col = 'design_to_target_iptm' if 'design_to_target_iptm' in df.columns else 'design_iiptm'
+
         # For 2D: affinity vs selectivity
-        x = df['design_iiptm'].values
+        x = df[affinity_col].values
         y = df['selectivity_composite'].values
 
         # Find Pareto frontier
@@ -411,8 +438,11 @@ class SelectivityVisualizer:
             'Median': []
         }
 
+        # Support both column naming conventions
+        affinity_col = 'design_to_target_iptm' if 'design_to_target_iptm' in df.columns else 'design_iiptm'
+
         metrics_to_summarize = [
-            ('design_iiptm', 'Primary Affinity (ipTM)'),
+            (affinity_col, 'Primary Affinity (ipTM)'),
             ('max_offtarget_iptm', 'Max Off-Target Affinity'),
             ('selectivity_composite', 'Selectivity Score'),
             ('solubility', 'Solubility'),
