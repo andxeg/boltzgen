@@ -23,3 +23,11 @@
 - **8u4q_full.pdb** - Complete PDB 8U4Q
 - **4mbs_full.pdb** - Complete PDB 4MBS
 - **6lfo_full.pdb** - Complete PDB 6LFO
+
+## How to extract chains
+```bash
+$ python ./scripts/extract_chain.py ./data/cxcr4/8u4q_full.pdb R ./data/cxcr4/8u4q_cxcr4.pdb
+$ python ./scripts/extract_chain.py ./data/cxcr4/4mbs_full.pdb A ./data/cxcr4/4mbs_ccr5.pdb
+$ python ./scripts/extract_chain.py ./data/cxcr4/6lfo_full.pdb A ./data/cxcr4/6lfo_cxcr2.pdb
+$ python ./scripts/create_scaffold.py ./data/cxcr4_backup/8u4q_full.pdb 8u4q_fab.pdb B:H A:L
+```
