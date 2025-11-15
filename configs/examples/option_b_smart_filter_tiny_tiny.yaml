@@ -1,0 +1,52 @@
+# Smart Pre-filtering - TINY TINY TEST
+# Minimal test to validate pipeline with smart filtering
+# Only 10 designs, 2 candidates - fast validation run
+
+project:
+  name: "CXCR4_smart_filter_tiny_tiny"
+  type: "existing_binder"
+
+targets:
+  positive:
+    - name: "CXCR4"
+      pdb: "data/cxcr4/8u4q_cxcr4.pdb"
+      chain: "R"
+  negative:
+    - name: "CCR5"
+      pdb: "data/cxcr4/4mbs_ccr5.pdb"
+      chain: "A"
+    - name: "CXCR2"
+      pdb: "data/cxcr4/6lfo_cxcr2.pdb"
+      chain: "A"
+
+scaffold:
+  pdb: "data/cxcr4/8u4q_fab.pdb"
+  chains: ["H", "L"]
+  design_regions:
+    - chain: "H"
+      residues: "26-35,50-65,95-102"
+    - chain: "L"
+      residues: "24-34,50-56,89-97"
+
+parameters:
+  num_designs: 10                # Generate 10 designs (tiny test)
+  num_candidates: 2              # Keep top 2 in final output
+  # num_offtarget_predictions: NOT SET (defaults to num_candidates)
+  budget: 10                     # Low budget for fast testing
+
+  # Performance note:
+  # Only top 2 (by primary affinity) scored against off-targets
+  # 2 candidates × 2 off-targets = 4 predictions
+  #
+  # This is a minimal test to validate the pipeline
+
+scoring:
+  multi_objective: true
+  weights:
+    affinity: 0.6
+    selectivity: 0.3
+    properties: 0.1
+
+output:
+  directory: "results/cxcr4_smart_filter_tiny_tiny"
+  format: ["csv", "json", "plots"]

@@ -1,8 +1,8 @@
-# Quick Test Configuration - CXCR4 Optimization
-# Fast test run to verify full pipeline
+# Smart Pre-filtering (Recommended, Default)
+# Score only top candidates against off-targets for efficiency
 
 project:
-  name: "CXCR4_quick_test"
+  name: "CXCR4_smart_filter"
   type: "existing_binder"
 
 targets:
@@ -28,13 +28,17 @@ scaffold:
       residues: "24-34,50-56,89-97"
 
 parameters:
-  num_designs: 20          # Total designs to generate
-  num_candidates: 5        # Keep top 5 in final output
-  budget: 20               # BoltzGen sampling budget
+  num_designs: 100               # Generate many designs
+  num_candidates: 10             # Keep top 10 in final output
+  # num_offtarget_predictions: NOT SET (defaults to num_candidates)
+  budget: 50
 
   # Performance note:
-  # Only top 5 (by primary affinity) scored against off-targets
-  # 5 candidates × 2 off-targets = 10 predictions
+  # Only top 10 (by primary affinity) scored against off-targets
+  # 10 candidates × 2 off-targets = 20 predictions
+  #
+  # Rationale: Designs with poor primary binding won't be selected
+  # anyway, so we skip expensive off-target predictions for them
 
 scoring:
   multi_objective: true
@@ -44,5 +48,5 @@ scoring:
     properties: 0.1
 
 output:
-  directory: "results/cxcr4_quick_test"
+  directory: "results/cxcr4_smart_filter"
   format: ["csv", "json", "plots"]

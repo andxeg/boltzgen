@@ -1,21 +1,16 @@
 # CXCR4 Existing Binder Optimization - Full Pipeline Test
-# =========================================================
 # Real end-to-end test: BoltzGen → Selectivity → Pareto → JSON
-# Target: 150 designs with 30 candidates for selectivity scoring
+# Target: 100 designs with 20 candidates for selectivity scoring
 
 project:
   name: "CXCR4_existing_binder_full_test"
   type: "existing_binder"
 
-# Target specification
 targets:
-  # Positive target (want to bind)
   positive:
     - name: "CXCR4"
       pdb: "data/cxcr4/8u4q_cxcr4.pdb"
       chain: "R"
-
-  # Negative targets (want to avoid)
   negative:
     - name: "CCR5"
       pdb: "data/cxcr4/4mbs_ccr5.pdb"
@@ -24,25 +19,24 @@ targets:
       pdb: "data/cxcr4/6lfo_cxcr2.pdb"
       chain: "A"
 
-# Scaffold configuration (REGN7663 Fab)
 scaffold:
   pdb: "data/cxcr4/8u4q_fab.pdb"
   chains: ["H", "L"]
   design_regions:
-    # Heavy chain CDRs
     - chain: "H"
-      residues: "26-35,50-65,95-102"  # CDR H1, H2, H3
-    # Light chain CDRs
+      residues: "26-35,50-65,95-102"
     - chain: "L"
-      residues: "24-34,50-56,89-97"   # CDR L1, L2, L3
+      residues: "24-34,50-56,89-97"
 
-# Design parameters
 parameters:
-  num_designs: 150         # Total designs to generate
-  num_candidates: 30       # Top N for selectivity scoring
+  num_designs: 100         # Total designs to generate
+  num_candidates: 20       # Keep top 20 in final output
   budget: 50               # BoltzGen sampling budget
 
-# Scoring configuration
+  # Performance note:
+  # Only top 20 (by primary affinity) scored against off-targets
+  # 20 candidates × 2 off-targets = 40 predictions
+
 scoring:
   weights:
     affinity: 0.6         # Primary target binding weight
@@ -50,7 +44,6 @@ scoring:
     properties: 0.1       # Biophysical properties weight
   multi_objective: true   # Enable Pareto ranking
 
-# Output configuration
 output:
   directory: "results/cxcr4_existing_binder_full_test"
   format: ["csv", "json", "plots"]

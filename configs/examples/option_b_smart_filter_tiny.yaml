@@ -1,8 +1,9 @@
-# Quick Test Configuration - CXCR4 Optimization
-# Fast test run to verify full pipeline
+# Smart Pre-filtering - TINY TEST
+# Minimal test to validate pipeline with smart filtering
+# Only 10 designs, 5 candidates - fast validation run
 
 project:
-  name: "CXCR4_quick_test"
+  name: "CXCR4_smart_filter_tiny"
   type: "existing_binder"
 
 targets:
@@ -28,13 +29,16 @@ scaffold:
       residues: "24-34,50-56,89-97"
 
 parameters:
-  num_designs: 20          # Total designs to generate
-  num_candidates: 5        # Keep top 5 in final output
-  budget: 20               # BoltzGen sampling budget
+  num_designs: 10                # Generate 10 designs (tiny test)
+  num_candidates: 5              # Keep top 5 in final output
+  # num_offtarget_predictions: NOT SET (defaults to num_candidates)
+  budget: 10                     # Low budget for fast testing
 
   # Performance note:
   # Only top 5 (by primary affinity) scored against off-targets
   # 5 candidates × 2 off-targets = 10 predictions
+  #
+  # This is a minimal test to validate the pipeline
 
 scoring:
   multi_objective: true
@@ -44,5 +48,5 @@ scoring:
     properties: 0.1
 
 output:
-  directory: "results/cxcr4_quick_test"
+  directory: "results/cxcr4_smart_filter_tiny"
   format: ["csv", "json", "plots"]

@@ -1,8 +1,8 @@
-# Quick Test Configuration - CXCR4 Optimization
-# Fast test run to verify full pipeline
+# Custom Configuration
+# Score a specific number of top candidates
 
 project:
-  name: "CXCR4_quick_test"
+  name: "CXCR4_custom"
   type: "existing_binder"
 
 targets:
@@ -28,13 +28,17 @@ scaffold:
       residues: "24-34,50-56,89-97"
 
 parameters:
-  num_designs: 20          # Total designs to generate
-  num_candidates: 5        # Keep top 5 in final output
-  budget: 20               # BoltzGen sampling budget
+  num_designs: 50                      # Generate 50 designs
+  num_candidates: 15                   # Keep top 15 in final output
+  num_offtarget_predictions: 20        # Score top 20 against off-targets
+  budget: 30
 
-  # Performance note:
-  # Only top 5 (by primary affinity) scored against off-targets
-  # 5 candidates × 2 off-targets = 10 predictions
+  # Configuration explanation:
+  # 1. Generate 50 designs (cast wide net)
+  # 2. Score top 20 against off-targets (reasonable compute)
+  # 3. Keep top 15 in final results (focused selection)
+  #
+  # Performance: 20 × 2 = 40 predictions
 
 scoring:
   multi_objective: true
@@ -44,5 +48,5 @@ scoring:
     properties: 0.1
 
 output:
-  directory: "results/cxcr4_quick_test"
+  directory: "results/cxcr4_custom"
   format: ["csv", "json", "plots"]

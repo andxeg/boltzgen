@@ -1,8 +1,8 @@
-# Quick Test Configuration - CXCR4 Optimization
-# Fast test run to verify full pipeline
+# Score ALL Designs (Exhaustive)
+# Use this when you want selectivity scores for every design
 
 project:
-  name: "CXCR4_quick_test"
+  name: "CXCR4_score_all"
   type: "existing_binder"
 
 targets:
@@ -28,13 +28,13 @@ scaffold:
       residues: "24-34,50-56,89-97"
 
 parameters:
-  num_designs: 20          # Total designs to generate
-  num_candidates: 5        # Keep top 5 in final output
-  budget: 20               # BoltzGen sampling budget
+  num_designs: 20
+  num_candidates: 5                # Final output will have top 5
+  num_offtarget_predictions: "all" # Score ALL 20 designs against off-targets
+  budget: 20
 
   # Performance note:
-  # Only top 5 (by primary affinity) scored against off-targets
-  # 5 candidates × 2 off-targets = 10 predictions
+  # 20 designs × 2 off-targets = 40 predictions
 
 scoring:
   multi_objective: true
@@ -44,5 +44,5 @@ scoring:
     properties: 0.1
 
 output:
-  directory: "results/cxcr4_quick_test"
+  directory: "results/cxcr4_score_all"
   format: ["csv", "json", "plots"]
