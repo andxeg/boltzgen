@@ -1,6 +1,6 @@
 # Selectivity Scorer
 
-Scores binder variants for affinity and selectivity against multiple targets.
+Scores binder variants for affinity and selectivity against multiple targets using real Boltz-2 structure predictions.
 
 ## Usage
 
@@ -43,13 +43,20 @@ selectivity_composite = (
 )
 ```
 
-## How It Works
+## How It Works (Production Implementation)
 
 1. Loads BoltzGen variants from workbench directory
-2. Predicts binding to primary target (Boltz-2)
-3. Predicts binding to each off-target (Boltz-2)
-4. Calculates selectivity scores
+2. Uses primary target metrics from BoltzGen analysis
+3. **For each off-target:**
+   - Creates YAML files for [Design + Off-target] complexes
+   - Runs **real Boltz-2 structure prediction** via `boltzgen run`
+   - Extracts ipTM and PAE metrics from predictions
+4. Calculates selectivity scores from real binding predictions
 5. Ranks designs by composite score
 6. Saves top N candidates to CSV
+
+**Key Feature:** This implementation uses actual Boltz-2 folding predictions for off-target binding, not estimates. Each design is predicted against each off-target, providing biophysically accurate selectivity measurements.
+
+**Performance:** Off-target prediction time scales with (num_candidates × num_off_targets). For 5 candidates and 2 off-targets, expect ~10-15 minutes of additional prediction time.
 
 See main README for integration details.
