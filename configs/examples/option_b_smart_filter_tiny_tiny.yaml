@@ -24,7 +24,7 @@ scaffold:
   chains: ["H", "L"]
   design_regions:
     - chain: "H"
-      residues: "26-35,50-65,95-102"
+      residues: "31-35,50-65,95-102"
     - chain: "L"
       residues: "24-34,50-56,89-97"
 
