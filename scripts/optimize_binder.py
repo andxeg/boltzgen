@@ -504,7 +504,21 @@ class BinderOptimizationPipeline:
                     continue
 
                 # Extract sequences from structures
-                design_sequences = self._extract_sequences_from_structure(structure_file)
+                # BUG FIX: Only extract BINDER chains, not the primary target chain
+                # BoltzGen outputs: first N chains = designed binder, last chain = primary target
+                # where N = len(scaffold.chains)
+                num_scaffold_chains = len(self.config['scaffold']['chains'])
+
+                all_design_sequences = self._extract_sequences_from_structure(structure_file)
+                if not all_design_sequences:
+                    print(f"    ⚠ Failed to extract sequences for {design_id}")
+                    continue
+
+                # Only take the first N chains (the designed binder chains)
+                all_chain_ids = sorted(all_design_sequences.keys())  # Sort to ensure order
+                binder_chain_ids = all_chain_ids[:num_scaffold_chains]
+                design_sequences = {chain_id: all_design_sequences[chain_id] for chain_id in binder_chain_ids}
+
                 offtarget_sequences = self._extract_sequences_from_structure(off_target_pdb, [offtarget_chain])
 
                 if not design_sequences or not offtarget_sequences:
@@ -529,20 +543,14 @@ class BinderOptimizationPipeline:
                 # Create Boltz-2 compatible YAML with sequences
                 sequences_list = []
 
-                # Add binder sequences
-                if len(design_chains) == 1:
+                # Add binder sequences - IMPORTANT: create separate entry for each chain!
+                # This ensures Boltz-2 treats them as different proteins (heterodimer)
+                # NOT as a homotrimer
+                for chain_id in design_chains:
                     sequences_list.append({
                         'protein': {
-                            'id': design_chains[0],
-                            'sequence': design_sequences[design_chains[0]]
-                        }
-                    })
-                else:
-                    # Multiple chains - list them together if identical or separate if different
-                    sequences_list.append({
-                        'protein': {
-                            'id': design_chains,
-                            'sequence': design_sequences[design_chains[0]]  # Assume first chain sequence
+                            'id': chain_id,
+                            'sequence': design_sequences[chain_id]
                         }
                     })
 
