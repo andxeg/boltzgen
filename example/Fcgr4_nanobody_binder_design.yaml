@@ -1,0 +1,34 @@
+entities:
+  - file:
+      path: fc4_model_0.pdb
+      include:
+        - chain:
+            id: A  # TODO: Update with actual chain ID from AlphaFold model
+      
+      # Interface extraction parameters:
+      #   - Distance cutoff: 4.5 Å for interface detection
+      #   - Hotspot identification: >1.0 Å² BSA threshold
+      #   - Masking window: ±5-8 residues around hotspots
+      # 
+      # TODO: Fill in actual binding site residues after interface analysis
+      # These should be identified from:
+      #   1. Interface detection (4.5 Å cutoff)
+      #   2. Hotspot residues with >1.0 Å² BSA
+      #   3. Extended with ±5-8 residue masking window
+      binding_types:
+        - chain:
+            id: A  # TODO: Update with actual chain ID
+            # Example format (replace with actual hotspot residues):
+            # binding: 10..25,50..65,100..115  # Hotspot regions with masking window
+      
+      # Structure visibility for visualization
+      structure_groups:
+        - group:
+            visibility: 1
+            id: A  # TODO: Update with actual chain ID
+  - file:
+      path:
+        - nanobody_scaffolds/7eow.yaml
+        - nanobody_scaffolds/7xl0.yaml
+        - nanobody_scaffolds/8coh.yaml
+        - nanobody_scaffolds/8z8v.yaml

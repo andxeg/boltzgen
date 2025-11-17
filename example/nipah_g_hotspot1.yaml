@@ -1,0 +1,19 @@
+entities:
+  - file:
+      path: 2VSM.cif
+      
+      include:
+        - chain: 
+            id: A
+            
+      binding_types:
+        - chain:
+            id: A
+            binding: 214, 215, 317
+            
+  - file:
+      path: 
+        - ../nanobody_scaffolds/7eow.yaml
+        - ../nanobody_scaffolds/7xl0.yaml
+        - ../nanobody_scaffolds/8coh.yaml
+        - ../nanobody_scaffolds/8z8v.yaml

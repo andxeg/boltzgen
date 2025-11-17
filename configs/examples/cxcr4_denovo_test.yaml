@@ -1,0 +1,44 @@
+# De Novo Design Test - CXCR4 with Selectivity Against CCR5/CXCR2
+# Testing if de novo approach generates better CXCR4 binders than inverse folding
+
+project:
+  name: "CXCR4_denovo_test"
+  type: "de_novo"  # De novo mode - generates binders from scratch
+
+targets:
+  positive:
+    - name: "CXCR4"
+      pdb: "data/cxcr4/8u4q_cxcr4.pdb"
+      chain: "R"
+  negative:
+    - name: "CCR5"
+      pdb: "data/cxcr4/4mbs_ccr5.pdb"
+      chain: "A"
+    - name: "CXCR2"
+      pdb: "data/cxcr4/6lfo_cxcr2.pdb"
+      chain: "A"
+
+# NO scaffold section in de novo mode - BoltzGen generates binders from scratch
+
+parameters:
+  num_designs: 50                # Generate 50 designs for reasonable sampling
+  num_candidates: 10             # Keep top 10 in final output
+  # num_offtarget_predictions: NOT SET (defaults to num_candidates = 10)
+  budget: 50                     # Higher budget for better quality
+
+  # Performance note:
+  # Only top 10 (by primary affinity) scored against off-targets
+  # 10 candidates × 2 off-targets = 20 predictions
+  #
+  # This is a test to validate the de novo approach
+
+scoring:
+  multi_objective: true
+  weights:
+    affinity: 0.6
+    selectivity: 0.3
+    properties: 0.1
+
+output:
+  directory: "results/cxcr4_denovo_test"
+  format: ["csv", "json", "plots"]

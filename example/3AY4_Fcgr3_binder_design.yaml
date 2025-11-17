@@ -1,0 +1,137 @@
+entities:
+  # ============================================
+  # TARGET: Fc receptor III-A (Fcgr3)
+  # ============================================
+  # Source: Chain C from 3AY4.cif (RCSB PDB)
+  # Structure preparation:
+  #   - Fetched from RCSB PDB (3AY4.cif)
+  #   - Crystallographic artifacts removed
+  #   - Glycans preserved
+  #   - Structural alignment performed using PyMOL for epitope mapping
+  # ============================================
+  - file:
+      path: 3AY4.cif
+      
+      # Include only chain C as the target (Fcgr3)
+      include:
+        - chain:
+            id: C
+      
+      # Interface extraction parameters:
+      #   - Distance cutoff: 4.5 Å for interface detection
+      #   - Hotspot identification: >1.0 Å² BSA threshold
+      #   - Masking window: ±5-8 residues around hotspots
+      # 
+      # TODO: Fill in actual binding site residues after interface analysis
+      # These should be identified from:
+      #   1. Interface detection (4.5 Å cutoff)
+      #   2. Hotspot residues with >1.0 Å² BSA
+      #   3. Extended with ±5-8 residue masking window
+      binding_types:
+        - chain:
+            id: C
+            # Example format (replace with actual hotspot residues):
+            # binding: 10..25,50..65,100..115  # Hotspot regions with masking window
+      
+      # Structure visibility for visualization
+      structure_groups:
+        - group:
+            visibility: 1
+            id: C
+  
+  # ============================================
+  # SCAFFOLD: Fc fragment from 3AY4 (chains A & B)
+  # ============================================
+  # Using scaffolds from available 3AY4 structures
+  # Interface hotspot extraction from 3AY4 complex
+  # ============================================
+  - file:
+      path: 3AY4.cif
+      
+      # Include chains A and B as the scaffold (Fc fragment)
+      include:
+        - chain:
+            id: A
+        - chain:
+            id: B
+      
+      # Design regions: Interface hotspots with masking window
+      # Based on interface extraction:
+      #   - 4.5 Å distance cutoff
+      #   - Hotspot identification (>1.0 Å² BSA)
+      #   - Masking window: ±5-8 residues around hotspots
+      # 
+      # TODO: Fill in actual design regions after interface analysis
+      # These should correspond to the interface regions that contact chain C
+      design:
+        - chain:
+            id: A
+            # Example format (replace with actual interface residues):
+            # res_index: 20..35,50..65  # Interface hotspots with masking window
+        - chain:
+            id: B
+            # Example format (replace with actual interface residues):
+            # res_index: 20..35,50..65  # Interface hotspots with masking window
+      
+      # Structure groups: Fixed scaffold regions visible, design regions hidden
+      # visibility: 1 = structure specified/fixed
+      # visibility: 0 = structure will be designed
+      structure_groups:
+        # Default: entire chains A and B have structure specified (fixed scaffold)
+        - group:
+            visibility: 1
+            id: A
+        - group:
+            visibility: 1
+            id: B
+        # Override: hide the redesigned regions (will be designed)
+        # TODO: Update res_index to match design regions above
+        - group:
+            visibility: 0
+            id: A
+            # res_index: 20..35,50..65  # These residues will be designed
+        - group:
+            visibility: 0
+            id: B
+            # res_index: 20..35,50..65  # These residues will be designed
+      
+      # Binding preferences: Regions that should bind to Fcgr3 (chain C)
+      # TODO: Fill in actual binding regions after interface analysis
+      binding_types:
+        - chain:
+            id: A
+            # 'B' = binding, 'N' = non-binding, 'u' = unspecified
+            # Example format (replace with actual binding regions):
+            # binding: 20..35,50..65  # Interface regions that bind to chain C
+        - chain:
+            id: B
+            # Example format (replace with actual binding regions):
+            # binding: 20..35,50..65  # Interface regions that bind to chain C
+
+# ============================================
+# CONSTRAINTS
+# ============================================
+constraints:
+  # Optional: Disulfide bonds to stabilize the scaffold
+  # Example: If scaffold has disulfide bonds that should be maintained
+  # - bond:
+  #     atom1: [A, 5, SG]   # Cysteine at position 5 in chain A
+  #     atom2: [A, 20, SG]  # Cysteine at position 20 in chain A
+  
+  # Optional: Cross-chain disulfide bonds between A and B
+  # - bond:
+  #     atom1: [A, 10, SG]
+  #     atom2: [B, 10, SG]
+  
+  # Optional: Total length constraint for designed regions
+  # - total_len:
+  #     min: 30   # Minimum total length of all designed regions
+  #     max: 150  # Maximum total length of all designed regions
+
+
+
+
+
+
+
+

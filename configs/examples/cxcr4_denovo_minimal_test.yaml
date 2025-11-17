@@ -1,0 +1,35 @@
+# MINIMAL De Novo Test - 5 designs, 2 candidates
+# Quick validation test for pipeline with BoltzGen workaround
+
+project:
+  name: "CXCR4_denovo_minimal"
+  type: "de_novo"
+
+targets:
+  positive:
+    - name: "CXCR4"
+      pdb: "data/cxcr4/8u4q_cxcr4.pdb"
+      chain: "R"
+  negative:
+    - name: "CCR5"
+      pdb: "data/cxcr4/4mbs_ccr5.pdb"
+      chain: "A"
+
+# NO scaffold for de novo mode
+
+parameters:
+  num_designs: 5                 # Minimal test: only 5 designs
+  num_candidates: 2              # Keep top 2
+  budget: 5                      # Minimal budget
+  skip_boltzgen_analysis: true   # NEW: Skip problematic BoltzGen step 3
+
+scoring:
+  multi_objective: true
+  weights:
+    affinity: 0.6
+    selectivity: 0.3
+    properties: 0.1
+
+output:
+  directory: "results/cxcr4_denovo_minimal"
+  format: ["csv", "json"]

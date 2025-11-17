@@ -1,0 +1,50 @@
+# CXCR4 De Novo Binder Design - Full Pipeline Test
+# ==================================================
+# Real end-to-end test: BoltzGen → Selectivity → Pareto → JSON
+# Target: 150 nanobody designs with 30 candidates for selectivity scoring
+# Hardware: H100 GPU
+
+project:
+  name: "CXCR4_denovo_full_test"
+  type: "de_novo"
+
+# Target specification
+targets:
+  # Positive target (want to bind)
+  positive:
+    - name: "CXCR4"
+      pdb: "data/cxcr4/8u4q_cxcr4.pdb"
+      chain: "R"
+
+  # Negative targets (want to avoid)
+  negative:
+    - name: "CCR5"
+      pdb: "data/cxcr4/4mbs_ccr5.pdb"
+      chain: "A"
+    - name: "CXCR2"
+      pdb: "data/cxcr4/6lfo_cxcr2.pdb"
+      chain: "A"
+
+# Binder specification (for de novo design)
+binder_spec:
+  length: "110-130"        # Nanobody typical length
+  type: "nanobody"
+
+# Design parameters
+parameters:
+  num_designs: 150         # Total designs to generate (H100)
+  num_candidates: 30       # Top N for selectivity scoring
+  budget: 50              # BoltzGen sampling budget
+
+# Scoring configuration
+scoring:
+  weights:
+    affinity: 0.6         # Primary target binding weight
+    selectivity: 0.3      # Off-target avoidance weight
+    properties: 0.1       # Biophysical properties weight
+  multi_objective: true   # Enable Pareto ranking
+
+# Output configuration
+output:
+  directory: "results/cxcr4_denovo_full_test"
+  format: ["csv", "json", "plots"]

@@ -1,0 +1,70 @@
+entities:
+  - file:
+      path: fc4_model_0.pdb
+
+      include:
+        - chain:
+            id: A  # TODO: Update with actual chain ID from AlphaFold model
+      
+      # Interface extraction parameters:
+      #   - Distance cutoff: 4.5 Å for interface detection
+      #   - Hotspot identification: >1.0 Å² BSA threshold
+      #   - Masking window: ±5-8 residues around hotspots
+      binding_types:
+        - chain:
+            id: A
+            # binding: 10..25,50..65,100..115 Optional Binding Regions
+
+      # Structure visibility for visualization
+      structure_groups:
+        - group:
+            visibility: 1
+            id: A  # TODO: Update with actual chain ID
+  
+  # ============================================
+  # SCAFFOLD: Nanobody scaffolds
+  # ============================================
+  # Using nanobody scaffolds from available structures
+  # CDR loops will be redesigned to bind Fcgr4
+  # ============================================
+  - file:
+      path:
+        - nanobody_scaffolds/7eow.yaml
+        - nanobody_scaffolds/7xl0.yaml
+        - nanobody_scaffolds/8coh.yaml
+        - nanobody_scaffolds/8z8v.yaml
+      
+      # Design regions: CDR loops (typically CDR1, CDR2, CDR3)
+      # Based on standard nanobody structure:
+      #   - CDR1: ~26-34
+      #   - CDR2: ~52-59
+      #   - CDR3: ~98-118 (variable length)
+      # 
+      # These regions will be redesigned to bind Fcgr4 based on:
+      #   - Interface extraction (4.5 Å cutoff)
+      #   - Hotspot identification (>1.0 Å² BSA)
+      #   - Masking window: ±5-8 residues around hotspots
+      
+      # Optional: Additional binding preferences
+      # TODO: Fill in if specific binding regions are identified
+      # binding_types:
+      #   - chain:
+      #       id: B  # Typical nanobody chain ID
+      #       binding: 26..34,52..59,98..118  # CDR regions
+
+# ============================================
+# CONSTRAINTS
+# ============================================
+# constraints:
+  # Optional: Disulfide bonds in nanobody scaffold
+  # Nanobodies typically have a disulfide bond between framework regions
+  # Example (if needed):
+  # - bond:
+  #     atom1: [B, 22, SG]   # Cysteine in framework
+  #     atom2: [B, 96, SG]   # Cysteine in framework
+  
+  # Optional: Total length constraint for designed CDR regions
+  # - total_len:
+  #     min: 20   # Minimum total length of all designed CDR regions
+  #     max: 50   # Maximum total length of all designed CDR regions
+

@@ -281,11 +281,25 @@ class BinderOptimizationPipeline:
             return workbench_dir
 
         # Build BoltzGen command
+        # Protocol selection:
+        #  - protein-anything: Multi-chain proteins (Fab, scFv) - for existing_binder inverse folding with 2+ chains
+        #  - nanobody-anything: Single-chain nanobodies (VHH) - for de_novo and single-chain inverse folding
+
+        # For de novo mode, always use nanobody-anything (generates single-chain binders)
+        # For existing_binder mode, use protein-anything if scaffold has 2+ chains, else nanobody-anything
+        if self.project_type == 'de_novo':
+            protocol = 'nanobody-anything'
+            print("  Using protocol: nanobody-anything (de novo single-chain binder)")
+        else:
+            num_scaffold_chains = len(self.config.get('scaffold', {}).get('chains', []))
+            protocol = 'protein-anything' if num_scaffold_chains > 1 else 'nanobody-anything'
+            print(f"  Using protocol: {protocol} ({num_scaffold_chains} scaffold chains)")
+
         cmd = [
             'boltzgen', 'run',
             str(config_path),
             '--output', str(workbench_dir),
-            '--protocol', 'nanobody-anything',
+            '--protocol', protocol,
             '--num_designs', str(num_designs),
             '--budget', str(budget),
             '--devices', '1'
@@ -302,8 +316,71 @@ class BinderOptimizationPipeline:
             self._log_stage_time("Stage 3: BoltzGen", stage_start)
             return workbench_dir
         except subprocess.CalledProcessError as e:
-            print(f"\nERROR: BoltzGen failed with exit code {e.returncode}")
+            print(f"\n⚠ BoltzGen encountered an error at exit code {e.returncode}")
+            print(f"  Checking for partial results...")
+
+            # Check if we have inverse_folded results (Steps 1-2 completed)
+            inverse_folded_dir = workbench_dir / "intermediate_designs_inverse_folded"
+            if inverse_folded_dir.exists():
+                # Count how many designs we have
+                designs = list(inverse_folded_dir.glob("*.cif"))
+                if designs:
+                    print(f"  ✓ Found {len(designs)} designs from Steps 1-2 (design + inverse_folding)")
+                    print(f"  ⚠ Step 3 (folding) failed, but we can continue with inverse_folded results")
+                    print(f"  → Using partial results from: {inverse_folded_dir}")
+                    self._log_stage_time("Stage 3: BoltzGen (partial)", stage_start)
+
+                    # Create a simple metrics file manually from npz files
+                    self._create_metrics_from_inverse_folded(inverse_folded_dir)
+                    return workbench_dir
+
+            print(f"\nERROR: BoltzGen failed and no partial results found")
             sys.exit(1)
+
+    def _create_metrics_from_inverse_folded(self, inverse_folded_dir: Path):
+        """
+        Create aggregate_metrics_analyze.csv from inverse_folded .npz files.
+
+        This is a workaround for when BoltzGen Step 3 (folding) fails but
+        Steps 1-2 (design + inverse_folding) completed successfully.
+        """
+        import pandas as pd
+
+        print(f"  Creating metrics from inverse_folded results...")
+
+        # Find all npz files
+        npz_files = sorted(inverse_folded_dir.glob("boltzgen_config_*.npz"))
+
+        if not npz_files:
+            print(f"  ⚠ No .npz files found in {inverse_folded_dir}")
+            return
+
+        metrics_list = []
+        for npz_file in npz_files:
+            try:
+                data = np.load(npz_file, allow_pickle=True)
+
+                # Extract key metrics
+                metrics = {
+                    'id': str(data.get('id', npz_file.stem)),
+                    'design_to_target_iptm': float(data.get('design_to_target_iptm', 0.0)),
+                    'min_design_to_target_pae': float(data.get('min_design_to_target_pae', 20.0)),
+                    'designed_sequence': str(data.get('designed_sequence', '')),
+                }
+
+                metrics_list.append(metrics)
+            except Exception as e:
+                print(f"    ⚠ Error processing {npz_file.name}: {e}")
+                continue
+
+        if metrics_list:
+            df = pd.DataFrame(metrics_list)
+            output_file = inverse_folded_dir / "aggregate_metrics_analyze.csv"
+            df.to_csv(output_file, index=False)
+            print(f"  ✓ Created metrics file: {output_file}")
+            print(f"  ✓ Processed {len(metrics_list)} designs")
+        else:
+            print(f"  ⚠ No metrics extracted")
 
     def _extract_sequences_from_structure(self, structure_path: Path, chain_ids: list = None) -> Dict[str, str]:
         """
@@ -506,17 +583,25 @@ class BinderOptimizationPipeline:
                 # Extract sequences from structures
                 # BUG FIX: Only extract BINDER chains, not the primary target chain
                 # BoltzGen outputs: first N chains = designed binder, last chain = primary target
-                # where N = len(scaffold.chains)
-                num_scaffold_chains = len(self.config['scaffold']['chains'])
 
                 all_design_sequences = self._extract_sequences_from_structure(structure_file)
                 if not all_design_sequences:
                     print(f"    ⚠ Failed to extract sequences for {design_id}")
                     continue
 
-                # Only take the first N chains (the designed binder chains)
                 all_chain_ids = sorted(all_design_sequences.keys())  # Sort to ensure order
-                binder_chain_ids = all_chain_ids[:num_scaffold_chains]
+
+                # Determine how many chains are binder vs target
+                if self.project_type == 'de_novo':
+                    # De novo mode: BoltzGen generates binder chains + target chain
+                    # Last chain is always the target, rest are binder chains
+                    binder_chain_ids = all_chain_ids[:-1]
+                    print(f"      [De novo mode] Extracted {len(binder_chain_ids)} binder chain(s): {binder_chain_ids}")
+                else:
+                    # Existing binder mode: we know how many scaffold chains to extract
+                    num_scaffold_chains = len(self.config['scaffold']['chains'])
+                    binder_chain_ids = all_chain_ids[:num_scaffold_chains]
+
                 design_sequences = {chain_id: all_design_sequences[chain_id] for chain_id in binder_chain_ids}
 
                 offtarget_sequences = self._extract_sequences_from_structure(off_target_pdb, [offtarget_chain])
@@ -639,7 +724,10 @@ class BinderOptimizationPipeline:
 
     def _extract_iptm_from_boltz2(self, prediction_dir: Path, yaml_stem: str) -> Optional[Dict[str, float]]:
         """
-        Extract ipTM and PAE scores from Boltz-2 prediction outputs.
+        Extract INTERFACE-SPECIFIC ipTM and PAE scores from Boltz-2 prediction outputs.
+
+        CRITICAL FIX: Extracts interface ipTM between binder chains and target chain,
+        NOT the total ipTM which includes intra-chain confidence.
 
         Boltz-2 output structure (actual):
         prediction_dir/
@@ -650,7 +738,7 @@ class BinderOptimizationPipeline:
                 pae_{yaml_stem}_model_0.npz          <- Contains PAE matrix
 
         Returns:
-            Dict with 'iptm' and 'pae' keys, or None if not found
+            Dict with 'iptm' (interface-specific) and 'pae' keys, or None if not found
         """
         import glob
 
@@ -664,9 +752,35 @@ class BinderOptimizationPipeline:
                     data = json.load(f)
                     result = {}
 
-                    # Extract ipTM
-                    if 'iptm' in data:
+                    # CRITICAL FIX: Extract interface-specific ipTM from pair_chains_iptm
+                    # This gives us the actual binding affinity between binder and target
+                    if 'pair_chains_iptm' in data:
+                        pair_chains = data['pair_chains_iptm']
+
+                        # Assume last chain is the target, earlier chains are binder
+                        # (This matches how we construct the YAML in _run_offtarget_predictions)
+                        num_chains = len(pair_chains)
+                        target_chain_idx = str(num_chains - 1)
+
+                        interface_iptms = []
+                        for chain_idx in range(num_chains - 1):
+                            chain_key = str(chain_idx)
+                            if chain_key in pair_chains and target_chain_idx in pair_chains[chain_key]:
+                                interface_iptm = pair_chains[chain_key][target_chain_idx]
+                                interface_iptms.append(interface_iptm)
+
+                        if interface_iptms:
+                            # Use average of binder-target interface ipTMs
+                            # This is the true measure of binding affinity
+                            result['iptm'] = float(np.mean(interface_iptms))
+                            result['max_interface_iptm'] = float(np.max(interface_iptms))
+                            result['min_interface_iptm'] = float(np.min(interface_iptms))
+                            print(f"      [Interface ipTM] chains: {interface_iptms}, avg: {result['iptm']:.3f}")
+
+                    # Fallback: use total ipTM if pair_chains not available (not ideal)
+                    if 'iptm' not in result and 'iptm' in data:
                         result['iptm'] = float(data['iptm'])
+                        print(f"      ⚠ Using total ipTM (pair_chains_iptm not available)")
 
                     # Try to load PAE from separate .npz file
                     pae_file = boltz_results_dir / "predictions" / yaml_stem / f"pae_{yaml_stem}_model_0.npz"

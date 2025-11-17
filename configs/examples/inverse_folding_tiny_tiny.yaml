@@ -1,0 +1,49 @@
+# Inverse Folding - TINY TINY TEST
+# Optimize existing Fab binder (8u4q) for CXCR4 selectivity
+# Protocol: protein-anything (2-chain Fab)
+
+project:
+  name: "CXCR4_inverse_folding_tiny_tiny"
+  type: "existing_binder"
+
+targets:
+  positive:
+    - name: "CXCR4"
+      pdb: "data/cxcr4/8u4q_cxcr4.pdb"
+      chain: "R"
+  negative:
+    - name: "CCR5"
+      pdb: "data/cxcr4/4mbs_ccr5.pdb"
+      chain: "A"
+    - name: "CXCR2"
+      pdb: "data/cxcr4/6lfo_cxcr2.pdb"
+      chain: "A"
+
+scaffold:
+  pdb: "data/cxcr4/8u4q_fab.pdb"
+  chains: ["H", "L"]
+  design_regions:
+    - chain: "H"
+      residues: "31-35,50-65,95-102"
+    - chain: "L"
+      residues: "24-34,50-56,89-97"
+
+parameters:
+  num_designs: 10        # Generate 10 designs
+  num_candidates: 5      # Score top 5 against off-targets
+  budget: 10             # Low budget (proven to work)
+
+  # Performance note:
+  # 5 candidates × 2 off-targets = 10 predictions
+  # Expected runtime: ~15-18 minutes
+
+scoring:
+  multi_objective: true
+  weights:
+    affinity: 0.6
+    selectivity: 0.3
+    properties: 0.1
+
+output:
+  directory: "results/cxcr4_inverse_folding_tiny_tiny"
+  format: ["csv", "json", "plots"]

@@ -1,0 +1,334 @@
+✓ Configuration loaded: configs/examples/option_b_smart_filter_tiny_tiny.yaml
+Pipeline log file: results/cxcr4_smart_filter_tiny_tiny/pipeline_20251116_084951.log
+/home/nebius/miniconda3/envs/boltzgen/lib/python3.12/site-packages/torch/__init__.py:1617: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:80.)
+  _C._set_float32_matmul_precision(precision)
+/home/nebius/miniconda3/envs/boltzgen/lib/python3.12/site-packages/pytorch_lightning/utilities/migration/utils.py:56: The loaded checkpoint was produced with Lightning v2.5.5, which is newer than your current Lightning version: v2.5.0
+Predicting: |          | 0/? [00:00<?, ?it/s][Step 1/5] design - Predicting: |          | 0/? [00:00<?, ?it/s][Step 1/5] design - Predicting:   0%|          | 0/5 [00:00<?, ?it/s]Predicting DataLoader 0:   0%|          | 0/5 [00:00<?, ?it/s]       [Step 1/5] design - Predicting DataLoader 0: :   0%|          | 0/5 [00:00<?, ?it/s]W1116 08:50:36.529000 3607723 site-packages/torch/fx/_symbolic_trace.py:52] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+[Step 1/5] design - Predicting DataLoader 0: :  20%|██        | 1/5 [00:33<02:12,  0.03it/s]Switched step_scale to 2.0
+Switched noise_scale to 0.88
+[Step 1/5] design - Predicting DataLoader 0: :  40%|████      | 2/5 [01:04<01:36,  0.03it/s][Step 1/5] design - Predicting DataLoader 0: :  60%|██████    | 3/5 [01:35<01:03,  0.03it/s]Loaded weights from /home/nebius/.cache/huggingface/hub/models--boltzgen--boltzgen-1/snapshots/c1be29e1f82ffcc72264f64b993c43fb4e0d17f0/boltzgen1_adherence.ckpt
+Switched checkpoint.
+Switched step_scale to 1.8
+Switched noise_scale to 0.95
+[Step 1/5] design - Predicting DataLoader 0: :  80%|████████  | 4/5 [02:07<00:31,  0.03it/s]Switched step_scale to 2.0
+Switched noise_scale to 0.88
+[Step 1/5] design - Predicting DataLoader 0: : 100%|██████████| 5/5 [02:37<00:00,  0.03it/s]Number of failed examples: 0
+[Step 1/5] design - Predicting DataLoader 0: : 100%|██████████| 5/5 [02:37<00:00,  0.03it/s][WARNING]: There were residues that have a structure group specified and are set to be designed. Make sure that you want to specify the backbone structure of designed residues.
+[WARNING]: There were residues that have a structure group specified and are set to be designed. Make sure that you want to specify the backbone structure of designed residues.
+[WARNING]: There were residues that have a structure group specified and are set to be designed. Make sure that you want to specify the backbone structure of designed residues.
+[WARNING]: There were residues that have a structure group specified and are set to be designed. Make sure that you want to specify the backbone structure of designed residues.
+[WARNING]: There were residues that have a structure group specified and are set to be designed. Make sure that you want to specify the backbone structure of designed residues.
+
+/home/nebius/miniconda3/envs/boltzgen/lib/python3.12/site-packages/pytorch_lightning/utilities/migration/utils.py:56: The loaded checkpoint was produced with Lightning v2.5.5, which is newer than your current Lightning version: v2.5.0
+/home/nebius/miniconda3/envs/boltzgen/lib/python3.12/site-packages/torch/__init__.py:1551: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:80.)
+  return _C._get_float32_matmul_precision()
+Initializing FromGeneratedDataModule datasets for results/cxcr4_smart_filter_tiny_tiny/workbench/intermediate_designs
+[Info] Number of files to process (including already processed ones): 5
+Found 1 targets and 5 remaining designs that still need to be processed in this step.
+Predicting: |          | 0/? [00:00<?, ?it/s][Step 2/5] inverse_folding - Predicting: |          | 0/? [00:00<?, ?it/s][Step 2/5] inverse_folding - Predicting:   0%|          | 0/5 [00:00<?, ?it/s]Predicting DataLoader 0:   0%|          | 0/5 [00:00<?, ?it/s]                [Step 2/5] inverse_folding - Predicting DataLoader 0: :   0%|          | 0/5 [00:00<?, ?it/s][Step 2/5] inverse_folding - Predicting DataLoader 0: :  20%|██        | 1/5 [00:02<00:09,  0.42it/s][Step 2/5] inverse_folding - Predicting DataLoader 0: :  40%|████      | 2/5 [00:03<00:05,  0.53it/s][Step 2/5] inverse_folding - Predicting DataLoader 0: :  60%|██████    | 3/5 [00:06<00:04,  0.47it/s][Step 2/5] inverse_folding - Predicting DataLoader 0: :  80%|████████  | 4/5 [00:08<00:02,  0.48it/s][Step 2/5] inverse_folding - Predicting DataLoader 0: : 100%|██████████| 5/5 [00:09<00:00,  0.50it/s]Number of failed examples: 0
+[Step 2/5] inverse_folding - Predicting DataLoader 0: : 100%|██████████| 5/5 [00:09<00:00,  0.50it/s]
+/home/nebius/miniconda3/envs/boltzgen/lib/python3.12/site-packages/pytorch_lightning/utilities/migration/utils.py:56: The loaded checkpoint was produced with Lightning v2.5.5, which is newer than your current Lightning version: v2.5.0
+/home/nebius/miniconda3/envs/boltzgen/lib/python3.12/site-packages/torch/__init__.py:1551: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:80.)
+  return _C._get_float32_matmul_precision()
+Initializing FromGeneratedDataModule datasets for results/cxcr4_smart_filter_tiny_tiny/workbench/intermediate_designs_inverse_folded
+[Info] Number of files to process (including already processed ones): 5
+Found 1 targets and 5 remaining designs that still need to be processed in this step.
+Predicting: |          | 0/? [00:00<?, ?it/s][Step 3/5] folding - Predicting: |          | 0/? [00:00<?, ?it/s][Step 3/5] folding - Predicting:   0%|          | 0/5 [00:00<?, ?it/s]Predicting DataLoader 0:   0%|          | 0/5 [00:00<?, ?it/s]        [Step 3/5] folding - Predicting DataLoader 0: :   0%|          | 0/5 [00:00<?, ?it/s]W1116 08:54:22.659000 3609347 site-packages/torch/fx/_symbolic_trace.py:52] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+[Step 3/5] folding - Predicting DataLoader 0: :  20%|██        | 1/5 [00:45<03:03,  0.02it/s][Step 3/5] folding - Predicting DataLoader 0: :  40%|████      | 2/5 [01:30<02:15,  0.02it/s][Step 3/5] folding - Predicting DataLoader 0: :  60%|██████    | 3/5 [02:14<01:29,  0.02it/s][Step 3/5] folding - Predicting DataLoader 0: :  80%|████████  | 4/5 [02:59<00:44,  0.02it/s][Step 3/5] folding - Predicting DataLoader 0: : 100%|██████████| 5/5 [03:44<00:00,  0.02it/s]Number of failed structure predictions: 0
+[Step 3/5] folding - Predicting DataLoader 0: : 100%|██████████| 5/5 [03:44<00:00,  0.02it/s]
+Initializing FromGeneratedDataModule datasets for results/cxcr4_smart_filter_tiny_tiny/workbench/intermediate_designs_inverse_folded
+[Info] Number of files to process (including already processed ones): 5
+Found 1 targets and 5 remaining designs that still need to be processed in this step.
+Processing samples:   0%|          | 0/5 [00:00<?, ?it/s]Processing samples:  20%|██        | 1/5 [00:14<00:56, 14.17s/it]Processing samples:  40%|████      | 2/5 [00:14<00:17,  5.92s/it]Processing samples:  80%|████████  | 4/5 [00:14<00:02,  2.26s/it]Processing samples: 100%|██████████| 5/5 [00:16<00:00,  3.23s/it]
+Computed metrics successfully for 5 out of 5.
+Loading saved metrics from disk. 1% of total:   0%|          | 0/5 [00:00<?, ?it/s]Loading saved metrics from disk. 1% of total: 100%|██████████| 5/5 [00:00<00:00, 70.94it/s]
+Number of targets: 1. Number of designs: 5.
+Total number of designs:     5
+Duplicates found: 0. Removing duplicates. 5 designs remain.
+
+Num designs that pass the has_x filter with threshold 0 where lower is better: 5
+Remaining designs: 5
+Num designs that pass the filter_rmsd filter with threshold 2.5 where lower is better: 0
+Remaining designs: 0
+Num designs that pass the filter_rmsd_design filter with threshold 2.5 where lower is better: 0
+Remaining designs: 0
+Num designs that pass the CYS_fraction filter with threshold 0 where lower is better: 5
+Remaining designs: 0
+Num designs that pass the ALA_fraction filter with threshold 0.2 where lower is better: 5
+Remaining designs: 0
+Num designs that pass the GLY_fraction filter with threshold 0.2 where lower is better: 5
+Remaining designs: 0
+Num designs that pass the GLU_fraction filter with threshold 0.2 where lower is better: 5
+Remaining designs: 0
+Num designs that pass the LEU_fraction filter with threshold 0.2 where lower is better: 5
+Remaining designs: 0
+Num designs that pass the VAL_fraction filter with threshold 0.2 where lower is better: 5
+Remaining designs: 0
+Only 0 designs pass filters. We highly recommend relaxing the thresholds.
+
+
+copy top design files: 0it [00:00, ?it/s]copy top design files: 5it [00:00, 799.31it/s]
+copy diversity files:   0%|          | 0/5 [00:00<?, ?it/s]copy diversity files: 100%|██████████| 5/5 [00:00<00:00, 902.12it/s]
+Files + CSV saved to results/cxcr4_smart_filter_tiny_tiny/workbench/final_ranked_designs
+
+Writing design files is done. Now making plots for a final summary .pdf file with statistics.
+Making liability plots for top 0 sequences.: 0it [00:00, ?it/s]Making liability plots for top 0 sequences.: 0it [00:00, ?it/s]
+A description of metrics and summarizing plots was written to: results/cxcr4_smart_filter_tiny_tiny/workbench/final_ranked_designs/results_overview.pdf
+
+=== Configuring pipeline ===
+Using dataset artifact: /home/nebius/.cache/huggingface/hub/datasets--boltzgen--inference-data/snapshots/c3d36fd276e9caf098c75d4113c6d5eb320b1a4c/mols.zip
+Creating output directory: results/cxcr4_smart_filter_tiny_tiny/workbench
+************** Checking design spec: results/cxcr4_smart_filter_tiny_tiny/boltzgen_config.yaml **************
+[WARNING]: There were residues that have a structure group specified and are set to be designed. Make sure that you want to specify the backbone structure of designed residues.
+Total designed residues: 56
+There are 0 unresolved residues and 65 unresolved atoms in the target.
+Design specification visualization is written to results/cxcr4_smart_filter_tiny_tiny/workbench/boltzgen_config.cif
+*************************************************************************************************************
+Using kernels: True [device capability: (9, 0)]
+Config overrides for protocol nanobody-anything: {'analysis': ['largest_hydrophobic=false', 'largest_hydrophobic_refolded=false'], 'filtering': ['filter_cysteine=true']}
+Using 1 devices
+Raw designs will be saved to: results/cxcr4_smart_filter_tiny_tiny/workbench/intermediate_designs
+Using diffusion batch size: 1
+Number of diffusion batches: 5
+Using model artifact: /home/nebius/.cache/huggingface/hub/models--boltzgen--boltzgen-1/snapshots/c1be29e1f82ffcc72264f64b993c43fb4e0d17f0/boltzgen1_diverse.ckpt
+Using model artifact: /home/nebius/.cache/huggingface/hub/models--boltzgen--boltzgen-1/snapshots/c1be29e1f82ffcc72264f64b993c43fb4e0d17f0/boltzgen1_adherence.ckpt
+Inverse fold will avoid the following residues: ['CYS']
+Inverse-folded designs will be saved to: results/cxcr4_smart_filter_tiny_tiny/workbench/intermediate_designs_inverse_folded
+Using model artifact: /home/nebius/.cache/huggingface/hub/models--boltzgen--boltzgen-1/snapshots/c1be29e1f82ffcc72264f64b993c43fb4e0d17f0/boltzgen1_ifold.ckpt
+Using model artifact: /home/nebius/.cache/huggingface/hub/models--boltzgen--boltzgen-1/snapshots/c1be29e1f82ffcc72264f64b993c43fb4e0d17f0/boltz2_conf_final.ckpt
+Final ranked designs will be saved to: results/cxcr4_smart_filter_tiny_tiny/workbench/final_ranked_designs
+[1] design                   
+[2] inverse_folding          
+[3] folding                  
+[4] analysis                 
+[5] filtering                
+Configuration complete. Configs written to results/cxcr4_smart_filter_tiny_tiny/workbench/config
+Steps manifest written to results/cxcr4_smart_filter_tiny_tiny/workbench/steps.yaml
+
+=== Executing pipeline ===
+**************************************************
+Pipeline step 1 of 5: design
+Running command: python /home/nebius/miniconda3/envs/boltzgen/lib/python3.12/site-packages/boltzgen/resources/main.py results/cxcr4_smart_filter_tiny_tiny/workbench/config/design.yaml
+✓ Step design completed successfully in 200.8s
+**************************************************
+Pipeline step 2 of 5: inverse_folding
+Running command: python /home/nebius/miniconda3/envs/boltzgen/lib/python3.12/site-packages/boltzgen/resources/main.py results/cxcr4_smart_filter_tiny_tiny/workbench/config/inverse_folding.yaml
+✓ Step inverse_folding completed successfully in 23.8s
+**************************************************
+Pipeline step 3 of 5: folding
+Running command: python /home/nebius/miniconda3/envs/boltzgen/lib/python3.12/site-packages/boltzgen/resources/main.py results/cxcr4_smart_filter_tiny_tiny/workbench/config/folding.yaml
+✓ Step folding completed successfully in 269.5s
+**************************************************
+Pipeline step 4 of 5: analysis
+Running command: python /home/nebius/miniconda3/envs/boltzgen/lib/python3.12/site-packages/boltzgen/resources/main.py results/cxcr4_smart_filter_tiny_tiny/workbench/config/analysis.yaml
+✓ Step analysis completed successfully in 25.1s
+**************************************************
+Pipeline step 5 of 5: filtering
+Running command: python /home/nebius/miniconda3/envs/boltzgen/lib/python3.12/site-packages/boltzgen/resources/main.py results/cxcr4_smart_filter_tiny_tiny/workbench/config/filtering.yaml
+✓ Step filtering completed successfully in 11.3s
+================================================================================
+Fine-Grained Binder Design Pipeline
+================================================================================
+Project: CXCR4_smart_filter_tiny_tiny
+Type: existing_binder
+Output: results/cxcr4_smart_filter_tiny_tiny
+================================================================================
+
+[Stage 1/7] Validating input files...
+  ✓ All input files found
+
+[Stage 2/7] Generating BoltzGen configuration...
+  ✓ BoltzGen config saved: results/cxcr4_smart_filter_tiny_tiny/boltzgen_config.yaml
+
+[Stage 3/7] Running BoltzGen design generation...
+  Command: boltzgen run results/cxcr4_smart_filter_tiny_tiny/boltzgen_config.yaml --output results/cxcr4_smart_filter_tiny_tiny/workbench --protocol nanobody-anything --num_designs 5 --budget 5 --devices 1
+  Generating 5 designs with budget 5...
+  This may take some time...
+
+
+  ✓ BoltzGen generation complete
+  ⏱ Stage 3: BoltzGen completed in 536.1s (8.9 min)
+
+[Stage 3.5/7] Running off-target predictions...
+  Mode: Smart pre-filtering - top 5 candidates only (recommended)
+  Selected top 5 candidates for off-target prediction
+  Using structures from: results/cxcr4_smart_filter_tiny_tiny/workbench/intermediate_designs
+
+  [1/2] Processing off-target: CCR5
+      ✓ Extracted ipTM = 0.885, PAE = 7.14
+      ✓ boltzgen_config_3: ipTM = 0.885, PAE = 7.14
+      ✓ Extracted ipTM = 0.880, PAE = 6.99
+      ✓ boltzgen_config_2: ipTM = 0.880, PAE = 6.99
+      ✓ Extracted ipTM = 0.900, PAE = 6.58
+      ✓ boltzgen_config_1: ipTM = 0.900, PAE = 6.58
+      ✓ Extracted ipTM = 0.870, PAE = 7.44
+      ✓ boltzgen_config_4: ipTM = 0.870, PAE = 7.44
+      ✓ Extracted ipTM = 0.876, PAE = 7.32
+      ✓ boltzgen_config_0: ipTM = 0.876, PAE = 7.32
+    ✓ Completed CCR5 predictions
+
+  [2/2] Processing off-target: CXCR2
+      ✓ Extracted ipTM = 0.503, PAE = 17.52
+      ✓ boltzgen_config_3: ipTM = 0.503, PAE = 17.52
+      ✓ Extracted ipTM = 0.543, PAE = 14.51
+      ✓ boltzgen_config_2: ipTM = 0.543, PAE = 14.51
+      ✓ Extracted ipTM = 0.534, PAE = 14.49
+      ✓ boltzgen_config_1: ipTM = 0.534, PAE = 14.49
+      ✓ Extracted ipTM = 0.541, PAE = 14.94
+      ✓ boltzgen_config_4: ipTM = 0.541, PAE = 14.94
+      ✓ Extracted ipTM = 0.533, PAE = 14.65
+      ✓ boltzgen_config_0: ipTM = 0.533, PAE = 14.65
+    ✓ Completed CXCR2 predictions
+
+  ✓ Off-target predictions saved to: results/cxcr4_smart_filter_tiny_tiny/workbench/offtarget_predictions
+  ⏱ Stage 3.5: Off-target predictions completed in 2602.6s (43.4 min)
+
+[Stage 4/7] Running selectivity scoring...
+  Scoring top 5 candidates...
+  Primary target: CXCR4
+  Off-targets: CCR5, CXCR2
+  Using pre-computed predictions from: results/cxcr4_smart_filter_tiny_tiny/workbench/offtarget_predictions
+
+============================================================
+SelectivityScorer: Multi-Target Selectivity Analysis
+============================================================
+Variants directory: results/cxcr4_smart_filter_tiny_tiny/workbench
+Primary target: 8u4q_cxcr4.pdb
+Off-targets: CCR5, CXCR2
+Num candidates: 5
+============================================================
+
+[1/4] Loading primary target metrics...
+  ✓ Loaded 5 variants
+  ✓ Top affinity (ipTM): 0.311
+  ✓ Mean affinity: 0.277
+
+[2/4] Extracting variant sequences...
+  Using structure directory: results/cxcr4_smart_filter_tiny_tiny/workbench/intermediate_designs
+  Extracting sequences:   0%|          | 0/5 [00:00<?, ?it/s]  Extracting sequences:  80%|████████  | 4/5 [00:00<00:00, 37.01it/s]  Extracting sequences: 100%|██████████| 5/5 [00:00<00:00, 38.71it/s]
+  ✓ Extracted 5 sequences
+
+[3/4] Scoring against off-targets...
+  [1/2] Scoring against CCR5...
+    Loading CCR5 predictions...
+    Using pre-computed predictions from: results/cxcr4_smart_filter_tiny_tiny/workbench/offtarget_predictions/CCR5
+    Extracting CCR5 metrics:   0%|          | 0/5 [00:00<?, ?it/s]    Extracting CCR5 metrics: 100%|██████████| 5/5 [00:00<00:00, 973.02it/s]
+    ✓ Mean off-target affinity (ipTM): 0.882
+  [2/2] Scoring against CXCR2...
+    Loading CXCR2 predictions...
+    Using pre-computed predictions from: results/cxcr4_smart_filter_tiny_tiny/workbench/offtarget_predictions/CXCR2
+    Extracting CXCR2 metrics:   0%|          | 0/5 [00:00<?, ?it/s]    Extracting CXCR2 metrics: 100%|██████████| 5/5 [00:00<00:00, 991.00it/s]
+    ✓ Mean off-target affinity (ipTM): 0.531
+
+[4/4] Calculating selectivity scores...
+  ✓ Mean selectivity: -0.468
+  ✓ Max selectivity: -0.400
+
+✓ Results saved to: results/cxcr4_smart_filter_tiny_tiny/selectivity_results/aggregate_metrics_selectivity.csv
+
+============================================================
+Selectivity Scoring Summary
+============================================================
+
+Top 10 Variants by Selectivity:
+------------------------------------------------------------
+        design_id  design_to_target_iptm  max_offtarget_iptm  selectivity_composite
+boltzgen_config_3                0.31107            0.885379              -0.400383
+boltzgen_config_2                0.28593            0.879855              -0.449248
+boltzgen_config_0                0.25809            0.876348              -0.489546
+boltzgen_config_1                0.26602            0.900354              -0.497823
+boltzgen_config_4                0.26493            0.870493              -0.503425
+
+============================================================
+Mean selectivity: -0.468
+Std selectivity: 0.043
+Best selectivity: -0.400
+============================================================
+
+
+  ✓ Selectivity scoring complete
+
+[Stage 5/7] Running Pareto multi-objective optimization...
+
+============================================================
+Multi-Objective Pareto Optimization
+============================================================
+
+Pareto Optimization:
+  Objectives: design_to_target_iptm, selectivity_composite
+  ✓ Found 1 Pareto-optimal designs (20.0%)
+  ✓ Ranked into 4 Pareto layers
+
+Trade-off Analysis:
+  design_to_target_iptm_vs_selectivity_composite: Independent objectives (r=nan)
+
+Representative Designs:
+  1. boltzgen_config_3: design_to_target_iptm=0.311, selectivity_composite=-0.400
+============================================================
+
+  ✓ Pareto frontier: 1 designs
+  ✓ Results saved: results/cxcr4_smart_filter_tiny_tiny/pareto_optimization/
+
+[Stage 6/7] Generating output files...
+  ✓ CSV results: results/cxcr4_smart_filter_tiny_tiny/ranked_designs.csv
+  Generating JSON output...
+  ✓ JSON output saved: results/cxcr4_smart_filter_tiny_tiny/results.json
+  ✓ JSON results: results/cxcr4_smart_filter_tiny_tiny/results.json
+  Generating visualization plots...
+
+============================================================
+Creating Selectivity Visualizations
+============================================================
+[1/4] Affinity vs Selectivity scatter...
+[2/4] Binding profile heatmap...
+[3/4] Selectivity distribution...
+[4/4] Property comparison...
+
+✓ Dashboard saved: results/cxcr4_smart_filter_tiny_tiny/plots/selectivity_dashboard.png
+
+Creating individual plots...
+  ✓ affinity_vs_selectivity.png
+  ✓ binding_profile_heatmap.png
+  ✓ pareto_frontier.png
+
+============================================================
+Visualization complete!
+============================================================
+
+
+============================================================
+Summary Statistics
+============================================================
+                 Metric   Mean   Std    Min    Max Median
+Primary Affinity (ipTM)  0.277 0.022  0.258  0.311  0.266
+Max Off-Target Affinity  0.882 0.011  0.870  0.900  0.880
+      Selectivity Score -0.468 0.043 -0.503 -0.400 -0.490
+============================================================
+
+  ✓ Visualizations: results/cxcr4_smart_filter_tiny_tiny/plots/
+
+✓ All outputs saved to: results/cxcr4_smart_filter_tiny_tiny
+
+[Stage 7/7] Pipeline summary
+  Project: CXCR4_smart_filter_tiny_tiny
+  Type: existing_binder
+  Output directory: results/cxcr4_smart_filter_tiny_tiny
+  Log file: results/cxcr4_smart_filter_tiny_tiny/pipeline_20251116_084951.log
+  Total time: 3142.5s (52.4 min / 0.87 hours)
+
+================================================================================
+PIPELINE COMPLETED
+Total execution time: 3142.5s (52.4 min / 0.87 hours)
+================================================================================
+
+================================================================================
+✓ PIPELINE COMPLETE!
+================================================================================
+
+Results available at: results/cxcr4_smart_filter_tiny_tiny
+  - ranked_designs.csv (Top candidates with selectivity scores)
+  - results.json (Structured output for web UI)
+  - pareto_optimization/ (Multi-objective analysis)
+  - plots/ (Visualization)
+================================================================================
+

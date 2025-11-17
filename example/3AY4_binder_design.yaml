@@ -1,0 +1,44 @@
+entities:
+  # Target protein: Fc receptor III-A (chain C from 3AY4.cif)
+  - file:
+      path: 3AY4.cif
+      
+      # Include only chain C as the target
+      include:
+        - chain:
+            id: C
+      
+      # Optional: Specify binding sites if you know which regions should be targeted
+      # Uncomment and modify the binding_types section if you have specific binding site information
+      # binding_types:
+      #   - chain:
+      #       id: C
+      #       binding: 10..20,50..60  # Example: specify which residues form the binding site
+      
+      # Optional: Set structure visibility for visualization
+      structure_groups:
+        - group:
+            visibility: 1
+            id: C
+  
+  # Designed binder protein
+  # This will be a protein designed to bind to the target
+  - protein:
+      id: BINDER
+      # Design a protein with 80-140 residues (length randomly sampled)
+      sequence: 80..140
+      
+      # Optional: Specify that all residues should bind to the target
+      # binding_types: B  # 'B' means binding, 'N' means non-binding, 'u' means unspecified
+      
+      # Optional: Specify secondary structure preferences
+      # secondary_structure: HHHLLLEEE  # H=helix, E=sheet, L=loop
+
+
+
+
+
+
+
+
+

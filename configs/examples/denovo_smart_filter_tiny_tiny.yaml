@@ -1,0 +1,48 @@
+# De Novo Nanobody Design - TINY TINY TEST
+# Pure de novo mode: BoltzGen generates single-chain nanobody (VHH) from scratch
+# Only 10 designs, 2 candidates - fast validation run
+# Protocol: nanobody-anything (single-chain binders)
+
+project:
+  name: "CXCR4_denovo_nanobody_tiny_tiny"
+  type: "de_novo"
+
+targets:
+  positive:
+    - name: "CXCR4"
+      pdb: "data/cxcr4/8u4q_cxcr4.pdb"
+      chain: "R"
+  negative:
+    - name: "CCR5"
+      pdb: "data/cxcr4/4mbs_ccr5.pdb"
+      chain: "A"
+    - name: "CXCR2"
+      pdb: "data/cxcr4/6lfo_cxcr2.pdb"
+      chain: "A"
+
+# NO SCAFFOLD - pure de novo design!
+# BoltzGen will generate single-chain nanobody (VHH) from scratch
+# Output: 1-chain binder (not 2-chain Fab)
+
+parameters:
+  num_designs: 10                # Generate 10 designs (tiny test)
+  num_candidates: 2              # Keep top 2 in final output
+  # num_offtarget_predictions: NOT SET (defaults to num_candidates)
+  budget: 10                     # Low budget to avoid BoltzGen errors
+
+  # Performance note:
+  # Only top 2 (by primary affinity) scored against off-targets
+  # 2 candidates × 2 off-targets = 4 predictions
+  #
+  # This is a minimal test to validate de novo nanobody pipeline
+
+scoring:
+  multi_objective: true
+  weights:
+    affinity: 0.6
+    selectivity: 0.3
+    properties: 0.1
+
+output:
+  directory: "results/cxcr4_denovo_nanobody_tiny_tiny"
+  format: ["csv", "json", "plots"]

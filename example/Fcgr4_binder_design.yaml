@@ -1,0 +1,17 @@
+entities:
+- file:
+    path: fc4_model_0.pdb
+    include:
+    - chain:
+        id: A
+    binding_types:
+    - chain:
+        id: A
+        binding: 81..97,106..142,148..168
+    structure_groups:
+    - group:
+        visibility: 1
+        id: A
+- protein:
+    id: G
+    sequence: 1..18PKDTLMISRTP30..48WYVDGVEVHNAK61..78TVLHQDWLNGKEY92..106TISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSL

@@ -1,0 +1,129 @@
+entities:
+  # First target: Fc receptor III-A (chain C from 3AY4.cif)
+  # This is the original target that the scaffold (chains A & B) already binds to
+  - file:
+      path: 3AY4.cif
+      
+      # Include chain C as the first target
+      include:
+        - chain:
+            id: C
+      
+      # Specify binding sites on chain C if known
+      # Uncomment and modify based on your knowledge of the binding interface
+      # binding_types:
+      #   - chain:
+      #       id: C
+      #       binding: 10..20,50..60  # Example binding site residues
+      
+      structure_groups:
+        - group:
+            visibility: 1
+            id: C
+
+  # Scaffold: Fc fragment (chains A & B from 3AY4.cif)
+  # This is the existing binder scaffold that we'll modify
+  - file:
+      path: 3AY4.cif
+      
+      # Include chains A and B as the scaffold
+      include:
+        - chain:
+            id: A
+        - chain:
+            id: B
+      
+      # Specify which regions of the scaffold to redesign
+      # Modify these residue ranges based on which parts you want to change
+      # Example: redesign CDR-like loops or specific binding regions
+      design:
+        - chain:
+            id: A
+            res_index: 20..30,50..60  # Example: redesign these regions on chain A
+        - chain:
+            id: B
+            res_index: 20..30,50..60  # Example: redesign these regions on chain B
+      
+      # Optional: Specify secondary structure for redesigned regions
+      # secondary_structure:
+      #   - chain:
+      #       id: A
+      #       helix: 20..25
+      #       loop: 26..30
+      #   - chain:
+      #       id: B
+      #       sheet: 50..55
+      #       loop: 56..60
+      
+      # Set structure visibility - scaffold regions that are NOT redesigned remain visible
+      # How it works: Later groups override earlier ones for specific residues
+      # - First, set visibility: 1 (structure specified/fixed) for entire chains A and B
+      # - Then, override specific redesigned regions to visibility: 0 (structure not specified, will be designed)
+      structure_groups:
+        # Set default: entire chains A and B have structure specified (visibility: 1)
+        - group:
+            visibility: 1
+            id: A
+        - group:
+            visibility: 1
+            id: B
+        # Override: hide the redesigned regions (visibility: 0 means structure will be designed, not fixed)
+        - group:
+            visibility: 0
+            id: A
+            res_index: 20..30,50..60  # These residues will be designed, not fixed
+        - group:
+            visibility: 0
+            id: B
+            res_index: 20..30,50..60  # These residues will be designed, not fixed
+      
+      # Optional: Specify binding preferences for the scaffold
+      # Regions that should maintain binding to target 1 (chain C)
+      binding_types:
+        - chain:
+            id: A
+            # 'B' = binding, 'N' = non-binding, 'u' = unspecified
+            # Example: keep some regions binding to original target
+            binding: 10..15,40..45  # Example: these regions bind to chain C
+        - chain:
+            id: B
+            binding: 10..15,40..45  # Example: these regions bind to chain C
+
+  # Second target: Your new positive target
+  # Replace this with your actual second target file
+  - file:
+      path: your_second_target.cif  # REPLACE with your second target file
+      
+      include:
+        - chain:
+            id: X  # REPLACE with the actual chain ID of your second target
+      
+      # Specify binding sites on the second target
+      # binding_types:
+      #   - chain:
+      #       id: X
+      #       binding: 100..110,150..160  # Example: specify binding site residues
+      
+      structure_groups:
+        - group:
+            visibility: 1
+            id: X
+
+constraints:
+  # Bond constraints: Create covalent bonds if needed
+  # Example: Disulfide bonds to stabilize the scaffold
+  # - bond:
+  #     atom1: [A, 5, SG]   # Cysteine at position 5 in chain A
+  #     atom2: [A, 20, SG]  # Cysteine at position 20 in chain A
+  
+  # Example: Cross-chain disulfide bonds between A and B
+  # - bond:
+  #     atom1: [A, 10, SG]
+  #     atom2: [B, 10, SG]
+  
+  # Total length constraint: Limit the total length of designed regions
+  # This can help control the size of insertions or modifications
+  # - total_len:
+  #     min: 50   # Minimum total length of all designed regions
+  #     max: 200  # Maximum total length of all designed regions
+
