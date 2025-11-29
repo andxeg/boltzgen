@@ -1,0 +1,16 @@
+# Protocol: protein-anything (De Novo)
+# Run on RTX 6000 GPU 0
+entities:
+  - file:
+      path: /lambda/nfs/Nipah-hackathon/andrei/boltzgen/protein_competition/pdb/2VSM_target_only_A.cif
+      include:
+        - chain:
+            id: A
+  - protein:
+      id: B
+      sequence: 60..90
+
+constraints:
+  - chain:
+      id: A
+      binding: 55,317,318,319,346,371,372,393,394,401

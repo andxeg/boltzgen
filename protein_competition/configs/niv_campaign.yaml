@@ -1,0 +1,40 @@
+# Nipah Virus G Protein Binder Design Specification
+# Protocol: protein-anything (De Novo Global Design)
+
+entities:
+  # target
+  - file:
+      path: /lambda/nfs/Nipah-hackathon/andrei/boltzgen/protein_competition/pdb/2VSM_target.cif
+      include:
+        - chain:
+            id: A
+
+  # binder
+  - protein:
+      id: B
+      # Sampling a range of lengths allows the model to find the optimal fold size
+      # 100-140 AA is a sweet spot for single-domain globular proteins
+      sequence: 100..140
+
+constraints:
+  # 3. Binding Site Constraints
+  # We instruct BoltzGen to direct the binder towards these specific residues.
+  # These residues correspond to the Hydrophobic Pocket and Polar Rim.
+  binding_types:
+    - chain:
+        id: A
+        # LIST OF INTERFACE RESIDUES (Based on PDB 2VSM analysis):
+        # 504 (Trp Gate), 505, 506 (Loop)
+        # 533 (Crucial Salt Bridge E533)
+        # 558, 559 (Pocket Wall)
+        # 580, 581, 588 (Hydrophobic Floor)
+        # 242 (Rim Arginine)
+        binding: 504,505,506,533,558,559,580,581,588,242
+
+    # Optional: Negative Constraints
+    # If there are known glycosylation sites near the pocket that are not modeled
+    # in the crystal structure, we should list them as 'not_binding' to avoid steric clashes.
+    # NiV-G has glycans, check literature for N-linked sites (e.g., N306, N481).
+    # - chain:
+    #     id: A
+    #     not_binding: 306,481

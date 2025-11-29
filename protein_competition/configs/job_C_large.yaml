@@ -1,0 +1,17 @@
+# Protocol: protein-anything (De Novo)
+# Run on A100
+entities:
+  - file:
+      path: /lambda/nfs/Nipah-hackathon/andrei/boltzgen/protein_competition/pdb/2VSM_target_only_A.cif
+      include:
+        - chain:
+            id: A
+  - protein:
+      id: B
+      sequence: 130..160
+
+constraints:
+  - chain:
+      id: A
+      # Critical hotspots: Trp Gate (317), Salt Bridge (346), Hydrophobic floor (393, 401)
+      binding: 55,317,318,319,346,371,372,393,394,401
