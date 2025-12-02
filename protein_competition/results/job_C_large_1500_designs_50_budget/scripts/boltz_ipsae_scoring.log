@@ -1,0 +1,689 @@
+================================================================================
+Boltz-2 + IPSAE Scoring Pipeline
+================================================================================
+
+📊 Scoring top 30 candidates
+
+📝 Will score 30 candidates
+⏱️  Estimated time: 120 minutes
+
+📁 Temp directory: /tmp/boltz_ipsae_gh6q7pbe
+
+
+================================================================================
+Scoring: job_C_large_0376
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 154 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0376.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0376_model_0.npz
+    CIF: job_C_large_0376_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.0000
+    pDockQ: 0.1711
+
+✅ Successfully scored job_C_large_0376
+
+================================================================================
+Scoring: job_C_large_0474
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 159 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0474.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0474_model_0.npz
+    CIF: job_C_large_0474_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.8627
+    pDockQ: 0.5318
+
+✅ Successfully scored job_C_large_0474
+
+================================================================================
+Scoring: job_C_large_0478
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 159 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0478.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0474_model_0.npz
+    CIF: job_C_large_0474_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.8627
+    pDockQ: 0.5318
+
+✅ Successfully scored job_C_large_0478
+
+================================================================================
+Scoring: job_C_large_0056
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 155 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0056.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0474_model_0.npz
+    CIF: job_C_large_0474_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.8627
+    pDockQ: 0.5318
+
+✅ Successfully scored job_C_large_0056
+
+================================================================================
+Scoring: job_C_large_0073
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 159 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0073.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0474_model_0.npz
+    CIF: job_C_large_0474_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.8627
+    pDockQ: 0.5318
+
+✅ Successfully scored job_C_large_0073
+
+================================================================================
+Scoring: job_C_large_0108
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 152 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0108.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0474_model_0.npz
+    CIF: job_C_large_0474_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.8627
+    pDockQ: 0.5318
+
+✅ Successfully scored job_C_large_0108
+
+================================================================================
+Scoring: job_C_large_0313
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 150 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0313.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0474_model_0.npz
+    CIF: job_C_large_0474_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.8627
+    pDockQ: 0.5318
+
+✅ Successfully scored job_C_large_0313
+
+================================================================================
+Scoring: job_C_large_0715
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 154 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0715.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0474_model_0.npz
+    CIF: job_C_large_0474_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.8627
+    pDockQ: 0.5318
+
+✅ Successfully scored job_C_large_0715
+
+================================================================================
+Scoring: job_C_large_0558
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 157 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0558.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0558_model_0.npz
+    CIF: job_C_large_0558_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.7834
+    pDockQ: 0.5049
+
+✅ Successfully scored job_C_large_0558
+
+================================================================================
+Scoring: job_C_large_0005
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 150 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0005.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0558_model_0.npz
+    CIF: job_C_large_0558_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.7834
+    pDockQ: 0.5049
+
+✅ Successfully scored job_C_large_0005
+
+================================================================================
+Scoring: job_C_large_0146
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 153 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0146.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0558_model_0.npz
+    CIF: job_C_large_0558_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.7834
+    pDockQ: 0.5049
+
+✅ Successfully scored job_C_large_0146
+
+================================================================================
+Scoring: job_C_large_0103
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 152 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0103.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0558_model_0.npz
+    CIF: job_C_large_0558_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.7834
+    pDockQ: 0.5049
+
+✅ Successfully scored job_C_large_0103
+
+================================================================================
+Scoring: job_C_large_0373
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 154 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0373.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0373
+
+================================================================================
+Scoring: job_C_large_0318
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 150 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0318.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0318
+
+================================================================================
+Scoring: job_C_large_0683
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 146 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0683.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0683
+
+================================================================================
+Scoring: job_C_large_0144
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 153 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0144.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0144
+
+================================================================================
+Scoring: job_C_large_0305
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 159 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0305.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0305
+
+================================================================================
+Scoring: job_C_large_0383
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 158 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0383.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0383
+
+================================================================================
+Scoring: job_C_large_0328
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 155 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0328.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0328
+
+================================================================================
+Scoring: job_C_large_0377
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 154 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0377.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0377
+
+================================================================================
+Scoring: job_C_large_0227
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 157 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0227.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0227
+
+================================================================================
+Scoring: job_C_large_0055
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 155 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0055.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0055
+
+================================================================================
+Scoring: job_C_large_0258
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 148 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0258.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0258
+
+================================================================================
+Scoring: job_C_large_0711
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 154 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0711.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0711
+
+================================================================================
+Scoring: job_C_large_0213
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 154 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0213.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0213
+
+================================================================================
+Scoring: job_C_large_0717
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 154 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0717.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0717
+
+================================================================================
+Scoring: job_C_large_0386
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 158 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0386.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0386
+
+================================================================================
+Scoring: job_C_large_0726
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 159 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0726.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0726
+
+================================================================================
+Scoring: job_C_large_0747
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 159 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0747.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0747
+
+================================================================================
+Scoring: job_C_large_0304
+================================================================================
+[1/4] Extracting sequences from CIF...
+  ✓ Found 2 chains: ['A', 'B']
+    Chain A: 416 residues
+    Chain B: 159 residues
+[2/4] Creating Boltz input YAML...
+  ✓ Created /tmp/boltz_ipsae_gh6q7pbe/inputs/job_C_large_0304.yaml
+[3/4] Running Boltz-2 prediction (this may take 3-5 minutes)...
+  ✓ Boltz prediction complete
+    PAE: pae_job_C_large_0373_model_0.npz
+    CIF: job_C_large_0373_model_0.cif
+[4/4] Running IPSAE scoring...
+  ✓ IPSAE complete
+    ipSAE:  0.6151
+    pDockQ: 0.4584
+
+✅ Successfully scored job_C_large_0304
+
+================================================================================
+✅ SUCCESS! Scored 30/30 candidates
+================================================================================
+
+📄 Results saved to: /lambda/nfs/Nipah-hackathon/andrei/boltzgen/protein_competition/results/job_C_large_1500_designs_50_budget/scripts/boltz_ipsae_scores.csv
+
+📊 Results:
+       design_id  boltz_ipSAE  boltz_pDockQ
+job_C_large_0376     0.000000        0.1711
+job_C_large_0474     0.862659        0.5318
+job_C_large_0478     0.862659        0.5318
+job_C_large_0056     0.862659        0.5318
+job_C_large_0073     0.862659        0.5318
+job_C_large_0108     0.862659        0.5318
+job_C_large_0313     0.862659        0.5318
+job_C_large_0715     0.862659        0.5318
+job_C_large_0558     0.783406        0.5049
+job_C_large_0005     0.783406        0.5049
+job_C_large_0146     0.783406        0.5049
+job_C_large_0103     0.783406        0.5049
+job_C_large_0373     0.615054        0.4584
+job_C_large_0318     0.615054        0.4584
+job_C_large_0683     0.615054        0.4584
+job_C_large_0144     0.615054        0.4584
+job_C_large_0305     0.615054        0.4584
+job_C_large_0383     0.615054        0.4584
+job_C_large_0328     0.615054        0.4584
+job_C_large_0377     0.615054        0.4584
+job_C_large_0227     0.615054        0.4584
+job_C_large_0055     0.615054        0.4584
+job_C_large_0258     0.615054        0.4584
+job_C_large_0711     0.615054        0.4584
+job_C_large_0213     0.615054        0.4584
+job_C_large_0717     0.615054        0.4584
+job_C_large_0386     0.615054        0.4584
+job_C_large_0726     0.615054        0.4584
+job_C_large_0747     0.615054        0.4584
+job_C_large_0304     0.615054        0.4584
+
+🔄 Comparing with Boltzgen metrics...
+              ID  Boltz ipSAE  Boltzgen ipTM  Boltz pDockQ  Boltzgen PTM
+job_C_large_0376     0.000000        0.86420        0.1711       0.91624
+job_C_large_0474     0.862659        0.84369        0.5318       0.92356
+job_C_large_0478     0.862659        0.83128        0.5318       0.92047
+job_C_large_0056     0.862659        0.81572        0.5318       0.90837
+job_C_large_0073     0.862659        0.81319        0.5318       0.91505
+job_C_large_0108     0.862659        0.78475        0.5318       0.91069
+job_C_large_0313     0.862659        0.78292        0.5318       0.89391
+job_C_large_0715     0.862659        0.78070        0.5318       0.90342
+job_C_large_0558     0.783406        0.77621        0.5049       0.89814
+job_C_large_0005     0.783406        0.77070        0.5049       0.92442
+job_C_large_0146     0.783406        0.77003        0.5049       0.92302
+job_C_large_0103     0.783406        0.76242        0.5049       0.88607
+job_C_large_0373     0.615054        0.73534        0.4584       0.88852
+job_C_large_0318     0.615054        0.73365        0.4584       0.91465
+job_C_large_0683     0.615054        0.72983        0.4584       0.88774
+job_C_large_0144     0.615054        0.72848        0.4584       0.88580
+job_C_large_0305     0.615054        0.72194        0.4584       0.87141
+job_C_large_0383     0.615054        0.71360        0.4584       0.89233
+job_C_large_0328     0.615054        0.71206        0.4584       0.90158
+job_C_large_0377     0.615054        0.69670        0.4584       0.85997
+job_C_large_0227     0.615054        0.69603        0.4584       0.84823
+job_C_large_0055     0.615054        0.69570        0.4584       0.88148
+job_C_large_0258     0.615054        0.69522        0.4584       0.88007
+job_C_large_0711     0.615054        0.69106        0.4584       0.87732
+job_C_large_0213     0.615054        0.68895        0.4584       0.85757
+job_C_large_0717     0.615054        0.68640        0.4584       0.80101
+job_C_large_0386     0.615054        0.68546        0.4584       0.82101
+job_C_large_0726     0.615054        0.68377        0.4584       0.88958
+job_C_large_0747     0.615054        0.68309        0.4584       0.87526
+job_C_large_0304     0.615054        0.67812        0.4584       0.83389
+
+📄 Comparison saved to: boltz_boltzgen_comparison.csv
+
+🗑️  Keep temporary files for inspection? (y/N): 
+📁 Temporary files kept in: /tmp/boltz_ipsae_gh6q7pbe
+Temporary files kept in: /tmp/boltz_ipsae_gh6q7pbe
